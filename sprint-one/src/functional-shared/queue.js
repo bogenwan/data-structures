@@ -4,5 +4,16 @@ var Queue = function() {
 };
 
 var queueMethods = {};
+queueMethods.size = function() {
+  return this.max - this.min - 1;
+};
+
+queueMethods.enqueue = function() {
+
+};
+
+queueMethods.dequeue = function() {
+  
+}
 
 
