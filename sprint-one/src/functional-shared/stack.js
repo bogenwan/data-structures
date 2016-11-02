@@ -1,6 +1,10 @@
 var Stack = function() {
-  // Hey! Rewrite in the new style. Your code will wind up looking very similar,
-  // but try not not reference your old code in writing the new style.
+  var instanceOf = {};
+  instanceOf.height = 0;
+  for (key in stackMethods) {
+    instanceOf[key] = stackMethods[key];
+  }
+  return instanceOf;
 };
 
 var stackMethods = {};
@@ -15,7 +19,7 @@ stackMethods.push = function(value) {
 };
 
 stackMethods.pop = function() {
-  if (this.height() > 0) {
+  if (this.size() > 0) {
     var tmp = this[this.height - 1];
     this[this.height - 1] = undefined;
     this.height--;
