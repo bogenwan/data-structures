@@ -5,4 +5,24 @@ var Stack = function() {
 
 var stackMethods = {};
 
+stackMethods.size = function() {
+  return this.height;
+};
+
+stackMethods.push = function(value) {
+  this[this.height] = value;
+  this.height++;
+};
+
+stackMethods.pop = function() {
+  if (this.height() > 0) {
+    var tmp = this[this.height - 1];
+    this[this.height - 1] = undefined;
+    this.height--;
+    return tmp;
+  } else {
+    return;
+  }
+};
+
 
