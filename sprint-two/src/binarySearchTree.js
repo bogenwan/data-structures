@@ -76,14 +76,10 @@ BinaryMethods.depthFirstLog = function(func) {
   depthFirst(this);
 };
 
-var test = BinarySearchTree(5);
-var array = [];
-var func = function(value) { array.push(value); };
-test.insert(2);
-test.insert(3);
-test.insert(7);
-test.insert(6);
-console.log(test.depthFirstLog(func));
+
 /*
  * Complexity: What is the time complexity of the above functions?
+ * Contains O(n) = lg(n)
+ * Insert O(n) = lg(n)
+ * depthFirstLog: O(n) = n
  */
