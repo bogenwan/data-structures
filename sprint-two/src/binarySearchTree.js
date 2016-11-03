@@ -93,7 +93,7 @@ BinaryMethods.rebalance = function() {
   pseudo.right = this;
 
   treeToVine(pseudo);
-  vineToTree(pseudo);
+  vineToTree(pseudo, this.count);
   this.depth = Math.ceil(Math.log2(this.count + 1));
 };
 
