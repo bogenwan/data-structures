@@ -44,7 +44,7 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
 
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-  if (hasEdge(fromNode, toNode)) {
+  if (this.hasEdge(fromNode, toNode)) {
     this[fromNode][toNode] = undefined;
     this[toNode][fromNode] = undefined;
   }
@@ -52,14 +52,14 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
+  for (var key in this) {
+    cb(key);
+  }
 };
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ * forEachNode O(n) = n
+ * all other functions O(n) = 1 
  */
 
-
-var instance = new Graph();
-var obj = {};
-console.log(obj[5]);
-console.log(obj[5][6]);
