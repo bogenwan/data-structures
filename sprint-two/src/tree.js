@@ -31,6 +31,20 @@ treeMethods.contains = function(target) {
   return false;
 };
 
+treeMethods.removeFromParent = function(target) {
+  if (this.parent === null) {
+    return;
+  } else {
+    var source = this;
+    this.parent.children = Array.prototype.call.filter(this.parent.children, function(child) {
+      if (child === source) {
+        return false;
+      }
+      return true;
+    });
+  }
+};
+
 
 
 /*
