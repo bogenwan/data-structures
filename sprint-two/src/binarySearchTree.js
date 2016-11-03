@@ -1,6 +1,8 @@
 var BinarySearchTree = function(value) {
   var instanceOf = {};
   instanceOf.value = value;
+  instanceOf.count = 1;
+  instanceOf.depth = 1;
   instanceOf.left = null;
   instanceOf.right = null;
   for (key in BinaryMethods) {
@@ -20,28 +22,52 @@ var Node = function(value) {
 var BinaryMethods = {};
 
 BinaryMethods.insert = function(value) {
-  if (this.root === null) {
-    this.root = Node(value);
-  } else {
-    var inserted = false;
-    var curr = this;
-    while (!inserted) {
-      if (value <= curr.value) {
-        if (curr.left === null) {
-          curr.left = Node(value);
-          inserted = true;
-        } else {
-          curr = curr.left;
-        }
+  var depth = 1;
+  this.count++;
+  var inserted = false;
+  var curr = this;
+  while (!inserted) {
+    depth++;
+    if (value <= curr.value) {
+      if (curr.left === null) {
+        curr.left = Node(value);
+        inserted = true;
       } else {
-        if (curr.right === null) {
-          curr.right = Node(value);
-          inserted = true;
-        } else {
-          curr = curr.right;
-        }
+        curr = curr.left;
+      }
+    } else {
+      if (curr.right === null) {
+        curr.right = Node(value);
+        inserted = true;
+      } else {
+        curr = curr.right;
       }
     }
+  }
+  this.depth = Math.max(this.depth, depth);
+  if (this.depth > 2 * Math.floor(Math.log(this.count + 1))) {
+    this.rebalance();
+  }
+};
+
+BinaryMethods.rebalance = function() {
+  var array = [];
+  var func = function(value) { array.push(value); };
+  this.depthFirstLog(func);
+  array.sort(function(a, b) {
+    return a - b;
+  });
+  var mid = Math.floor(array.length / 2);
+  this.value = array[mid];
+  this.left = null;
+  this.right = null;
+  this.depth = 1;
+  this.count = 1;
+  for (var i = mid - 1; i >= 0; i--) {
+    this.insert(array[i]);
+  }
+  for (var i = mid + 1; i < array.length; i++) {
+    this.insert(array[i]);
   }
 };
 
