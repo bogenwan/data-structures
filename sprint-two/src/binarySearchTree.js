@@ -45,7 +45,7 @@ BinaryMethods.insert = function(value) {
     }
   }
   this.depth = Math.max(this.depth, depth);
-  if (this.depth > 2 * Math.ceil(Math.log2(this.count + 1))) {
+  if (this.depth >= 2 * Math.ceil(Math.log2(this.count + 1))) {
     this.rebalance();
   }
 };
