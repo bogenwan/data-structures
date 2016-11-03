@@ -45,30 +45,14 @@ BinaryMethods.insert = function(value) {
     }
   }
   this.depth = Math.max(this.depth, depth);
-  if (this.depth > 2 * Math.floor(Math.log(this.count + 1))) {
+  if (this.depth > 2 * Math.floor(Math.log2(this.count + 1))) {
     this.rebalance();
   }
 };
 
 BinaryMethods.rebalance = function() {
-  var array = [];
-  var func = function(value) { array.push(value); };
-  this.depthFirstLog(func);
-  array.sort(function(a, b) {
-    return a - b;
-  });
-  var mid = Math.floor(array.length / 2);
-  this.value = array[mid];
-  this.left = null;
-  this.right = null;
-  this.depth = 1;
-  this.count = 1;
-  for (var i = mid - 1; i >= 0; i--) {
-    this.insert(array[i]);
-  }
-  for (var i = mid + 1; i < array.length; i++) {
-    this.insert(array[i]);
-  }
+  var pseudo = Node(0);
+  pseudo.right = this;
 };
 
 BinaryMethods.contains = function(value) {
