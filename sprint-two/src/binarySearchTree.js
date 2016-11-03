@@ -150,20 +150,11 @@ BinaryMethods.breadthFirstLog = function(func) {
       breadthFirst(node.right, depth + 1);
     }
   };
-  var flatten = function(array) {
-    var flat = [];
-    for (var i = 0; i < array.length; i++) {
-      for (var j = 0; j < array[i].length; j++) {
-        flat.push(array[i][j]);
-      }
-    }
-    return array;
-  };
   breadthFirst(this, 0);
-  breadth = flatten(breadth);
-
   for (var i = 0; i < breadth.length; i++) {
-    func(breadth[i]);
+    for (var j = 0; j < breadth[i].length; j++) {
+      func(breadth[i][j]);
+    }
   }
 };
 
