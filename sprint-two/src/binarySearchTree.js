@@ -126,7 +126,7 @@ BinaryMethods.contains = function(value) {
 BinaryMethods.depthFirstLog = function(func) {
   var depthFirst = function(node) {
     if (node === null) {
-      return;
+      return null;
     } else {
       func(node.value);
       depthFirst(node.left);
@@ -134,6 +134,37 @@ BinaryMethods.depthFirstLog = function(func) {
     }
   };
   depthFirst(this);
+};
+
+BinaryMethods.breadthFirstLog = function(func) {
+  var breadth = [];
+  for (var i = 0; i < this.depth; i++) {
+    breadth[i] = [];
+  }
+  var breadthFirst = function(node, depth) {
+    if (node === null) {
+      return null;
+    } else {
+      breadth[depth].push(node.value);
+      breadthFirst(node.left, depth + 1);
+      breadthFirst(node.right, depth + 1);
+    }
+  };
+  var flatten = function(array) {
+    var flat = [];
+    for (var i = 0; i < array.length; i++) {
+      for (var j = 0; j < array[i].length; j++) {
+        flat.push(array[i][j]);
+      }
+    }
+    return array;
+  };
+  breadthFirst(this, 0);
+  breadth = flatten(breadth);
+
+  for (var i = 0; i < breadth.length; i++) {
+    func(breadth[i]);
+  }
 };
 
 BinaryMethods._computeDepth = function() {
@@ -151,11 +182,12 @@ var tree = BinarySearchTree(5);
 tree.insert(2);
 tree.insert(1);
 tree.insert(6);
-tree.insert(10);
-tree.insert(11);
 tree.insert(7);
 tree.insert(8);
 tree.insert(9);
+tree.insert(10);
+tree.insert(11);
+tree.insert(12);
 var array = [];
 var func = function(value) { array.push(value); };
 tree.depthFirstLog(func);
