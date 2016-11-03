@@ -128,7 +128,16 @@ BinaryMethods.depthFirstLog = function(func) {
   depthFirst(this);
 };
 
-
+BinaryMethods._computeDepth = function() {
+  var depthRecurse = function(node, count) {
+    if (node === null) {
+      return count;
+    } else {
+      return Math.max(depthRecurse(node.left, count + 1), depthRecurse(node.right, count + 1));
+    }
+  };
+  return depthRecurse(this, 1);
+};
 /*
  * Complexity: What is the time complexity of the above functions?
  * Contains O(n) = lg(n)
