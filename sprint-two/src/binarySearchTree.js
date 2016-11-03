@@ -51,6 +51,32 @@ BinaryMethods.insert = function(value) {
 };
 
 BinaryMethods.rebalance = function() {
+  var treeToVine = function(top) {
+    var tail = top;
+    var rest = tail.right;
+    while (rest !== null) {
+      if (rest.left === null) {
+        tail = rest;
+        rest = rest.right;
+      } else {
+        var temp = rest.left;
+        rest.left = temp.right;
+        temp.right = rest;
+        rest = temp;
+        tail.right = temp;
+      }
+    }
+  };
+
+  var vineToTree = function(top, size) {
+    var numLeaves = size + 1 - Math.pow(2, Math.floor(Math.log2(size + 1)));
+
+  };
+
+  var compress = function(top, count) {
+    
+  };
+
   var pseudo = Node(0);
   pseudo.right = this;
 };
