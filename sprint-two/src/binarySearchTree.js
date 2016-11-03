@@ -68,10 +68,11 @@ BinaryMethods.rebalance = function() {
     }
   };
 
-  var vineToTree = function(top, size) {
-    var numLeaves = size + 1 - Math.pow(2, Math.floor(Math.log2(size + 1)));
+  var vineToTree = function(top, count) {
+    var numLeaves = count + 1 - Math.pow(2, Math.floor(Math.log2(count + 1)));
     compress(top, numLeaves);
-    size -= numLeaves;
+    var size = count - numLeaves;
+    console.log('hi', size);
     while (size > 1) {
       compress(top, Math.floor(size / 2));
       size = Math.floor(size / 2);
@@ -89,12 +90,19 @@ BinaryMethods.rebalance = function() {
     }    
   };
 
-  var pseudo = Node(0);
-  pseudo.right = this;
+  var pseudoGrand = Node(0);
+  var pseudoRoot = Node(this.value);
+  pseudoRoot.left = this.left;
+  pseudoRoot.right = this.right;
+  pseudoGrand.right = pseudoRoot;
 
-  treeToVine(pseudo);
-  vineToTree(pseudo, this.count);
-  this.depth = Math.ceil(Math.log2(this.count + 1));
+  treeToVine(pseudoGrand);
+  vineToTree(pseudoGrand, this.count);
+  this.value = pseudoGrand.right.value;
+  this.left = pseudoGrand.right.left;
+  this.right = pseudoGrand.right.right;
+
+  this.depth = this._computeDepth();
 };
 
 BinaryMethods.contains = function(value) {
@@ -136,8 +144,23 @@ BinaryMethods._computeDepth = function() {
       return Math.max(depthRecurse(node.left, count + 1), depthRecurse(node.right, count + 1));
     }
   };
-  return depthRecurse(this, 1);
+  return depthRecurse(this, 0);
 };
+
+var tree = BinarySearchTree(5);
+tree.insert(2);
+tree.insert(1);
+tree.insert(6);
+tree.insert(10);
+tree.insert(11);
+tree.insert(7);
+tree.insert(8);
+tree.insert(9);
+var array = [];
+var func = function(value) { array.push(value); };
+tree.depthFirstLog(func);
+console.log(array);
+tree.rebalance;
 /*
  * Complexity: What is the time complexity of the above functions?
  * Contains O(n) = lg(n)
