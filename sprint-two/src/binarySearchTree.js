@@ -45,7 +45,7 @@ BinaryMethods.insert = function(value) {
     }
   }
   this.depth = Math.max(this.depth, depth);
-  if (this.depth > 2 * Math.floor(Math.log2(this.count + 1))) {
+  if (this.depth > 2 * Math.ceil(Math.log2(this.count + 1))) {
     this.rebalance();
   }
 };
@@ -70,15 +70,31 @@ BinaryMethods.rebalance = function() {
 
   var vineToTree = function(top, size) {
     var numLeaves = size + 1 - Math.pow(2, Math.floor(Math.log2(size + 1)));
-
+    compress(top, numLeaves);
+    size -= numLeaves;
+    while (size > 1) {
+      compress(top, Math.floor(size / 2));
+      size = Math.floor(size / 2);
+    }
   };
 
   var compress = function(top, count) {
-    
+    var scanner = top;
+    for (var i = 0; i < count; i++) {
+      var child = scanner.right;
+      scanner.right = child.right;
+      scanner = scanner.right;
+      child.right = scanner.left;
+      scanner.left = child;
+    }    
   };
 
   var pseudo = Node(0);
   pseudo.right = this;
+
+  treeToVine(pseudo);
+  vineToTree(pseudo);
+  this.depth = Math.ceil(Math.log2(this.count + 1));
 };
 
 BinaryMethods.contains = function(value) {
