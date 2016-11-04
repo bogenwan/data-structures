@@ -101,17 +101,27 @@ var RBTree = function() {
     return true;
   };
 
-  this.delete = function(value) {
+  this.remove = function(value) {
     var remove = this._search(value);
     if (remove === null) {
       return null;
     }
-
+    //case 1, no children
     if (remove.left === null && remove.right === null) {
       if (remove === this.root) {
         this.root = null;
       } else {
+        if (remove.isLeftChild) {
+          remove.parent.left = null;
+        } else {
+          remove.parent.right = null;
+        }
+      }
+    } else if (remove.left === null ^ remove.right === null) {
+      if (remove === this.root) {
+        if (remove.left === null) {
 
+        }
       }
     }
   };
