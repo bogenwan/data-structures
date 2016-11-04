@@ -18,7 +18,7 @@ setPrototype.contains = function(item) {
 };
 
 setPrototype.remove = function(item) {
-  this._storage[JSON.stringify(item)] = undefined;
+  delete this._storage[JSON.stringify(item)];
 };
 
 /*
