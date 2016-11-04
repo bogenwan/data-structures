@@ -77,7 +77,6 @@ BinaryMethods.rebalance = function() {
     var numLeaves = count + 1 - Math.pow(2, Math.floor(Math.log2(count + 1)));
     compress(top, numLeaves);
     var size = count - numLeaves;
-    console.log('hi', size);
     while (size > 1) {
       compress(top, Math.floor(size / 2));
       size = Math.floor(size / 2);
