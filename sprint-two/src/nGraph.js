@@ -32,7 +32,7 @@ nGraph.prototype.DFS = function(callBack, node) {
   var first = [];
   visited[node] = true;
   first.push(node);
-  callBack(node);
+  callback(node);
   var depthRecurse = function(exploring) {
     if (exploring.length === 0) {
       return null;
@@ -40,15 +40,16 @@ nGraph.prototype.DFS = function(callBack, node) {
     var toExplore = [];
     for (var i = 0; i < exploring.length; i++) {
       for (var toNode in graph[exploring[i]]) {
-        if (exploring[toNode] !== true) {
-          exploring[toNode] = true;
-          callBack(toNode);
+        if (visited[toNode] !== true) {
+          visited[toNode] = true;
+          callback(toNode);
           toExplore.push(toNode);
         }
       }
     }
     depthRecurse(toExplore);
   };
+  depthRecurse(node);
 };
 
 var graph = new nGraph();
@@ -66,6 +67,8 @@ fileLines.forEach(function(line) {
   var pair = line.split(' ');
   graph.addPair(pair[0], pair[1]);
   console.log(line);
-
 });
+
+
+
 
