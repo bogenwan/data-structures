@@ -1,8 +1,8 @@
 var Queue = function() {
-  var someInstace = Object.create(queueMethods);
-  someInstace.min = 0;
-  someInstace.max = 0;
-  return someInstace;
+  var someInstance = Object.create(queueMethods);
+  someInstance.min = 0;
+  someInstance.max = 0;
+  return someInstance;
 };
 
 var queueMethods = {};
@@ -17,7 +17,6 @@ queueMethods.enqueue = function(value) {
 
 queueMethods.dequeue = function() {
   if (this.size() > 0) {
-    console.log(this.min);
     var tmp = this[this.min];
     this[this.min] = undefined;
     this.min++;

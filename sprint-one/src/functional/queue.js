@@ -23,7 +23,7 @@ var Queue = function() {
     }
   };
 
-  someInstance.size = function() {
+  someInstance.size = function() { // size is the difference between max and min
     return max - min - 1;
   };
 
