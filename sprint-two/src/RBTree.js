@@ -46,8 +46,6 @@ var RBTree = function() {
     }
   };
 
-
-
   this.insert = function(value) {
     if (this.root === null) {
       this.root = new RBNode(value, null);
@@ -73,6 +71,30 @@ var RBTree = function() {
       }
     }
   };
+
+  this._search = function(value) {
+    var curr = this.root;
+    while (curr !== null) {
+      if (curr.value === value) {
+        return curr;
+      } else if (curr.value > value) {
+        curr = curr.left;
+      } else {
+        curr = curr.right;
+      }
+    }
+    return null;
+  };
+
+  this.contains = function(value) {
+    var tmp = this._search(value);
+    if (tmp === null) {
+      return false;
+    }
+    return true;
+  };
+
+
 
   this.depthFirst = function(callBack, order) {
     var preOrder = function(node) {
