@@ -16,7 +16,7 @@ HashTable.prototype.insert = function(k, v) {
     this._storage.set(index, bucket);
   }
   this._count++;
-  if (this._count >= (0.75 * this._limit)) {
+  if (this._count > (0.75 * this._limit)) {
     this.double();
   }
 };
@@ -37,9 +37,9 @@ HashTable.prototype.remove = function(k) {
   if (bucket === undefined) {
     return null;
   } else {
-    bucket[k] = undefined;
+    delete bucket[k];
     this._count--;
-    if (this._count <= (0.25 * this._limit)) {
+    if (this._count < (0.25 * this._limit)) {
       this.halve();
     }
   }
@@ -55,6 +55,7 @@ HashTable.prototype.double = function() {
   }
   this._limit *= 2;
   this._storage = LimitedArray(this._limit);
+  this._count = 0;
   for (var i = 0; i < holder.length; i++) {
     for (var key in holder[i]) {
       this.insert(key, holder[i][key]);
@@ -75,6 +76,7 @@ HashTable.prototype.halve = function() {
   }
   this._limit /= 2;
   this._storage = LimitedArray(this._limit);
+  this._count = 0;
   for (var i = 0; i < holder.length; i++) {
     for (var key in holder[i]) {
       this.insert(key, holder[i][key]);
