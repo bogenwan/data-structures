@@ -35,7 +35,7 @@ describe('linkedList', function() {
     linkedList.addToTail(4);
     expect(linkedList.head.value).to.equal(4);
     expect(linkedList.head.next).to.equal(null);
-    //expect(linkedList.head.prev).to.equal(null);
+    expect(linkedList.head.prev).to.equal(null);
     expect(linkedList.removeHead()).to.equal(4);
   });
 
