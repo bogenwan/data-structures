@@ -62,4 +62,6 @@ treeMethods.removeFromParent = function(target) {
  *
  * contains O(n) = n
  * addChild O(n) = 1
+ * traverse O(n) = n
+ * removeFromParent O(n) = b where b is the maximum branching factor of the tree
  */
