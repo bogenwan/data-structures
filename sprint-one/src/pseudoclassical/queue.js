@@ -9,7 +9,6 @@ Queue.prototype.size = function() {
 
 Queue.prototype.dequeue = function() {
   if (this.size() > 0) {
-    console.log(this.min);
     var tmp = this[this.min];
     this[this.min] = undefined;
     this.min++;

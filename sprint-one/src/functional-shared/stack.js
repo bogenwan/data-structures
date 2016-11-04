@@ -1,7 +1,7 @@
 var Stack = function() {
   var instanceOf = {};
   instanceOf.height = 0;
-  for (key in stackMethods) {
+  for (var key in stackMethods) {
     instanceOf[key] = stackMethods[key];
   }
   return instanceOf;

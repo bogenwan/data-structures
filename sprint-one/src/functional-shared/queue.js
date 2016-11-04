@@ -1,11 +1,11 @@
 var Queue = function() {
-  var someInstace = {};
-  someInstace.min = 0;
-  someInstace.max = 0;
+  var someInstance = {};
+  someInstance.min = 0;
+  someInstance.max = 0;
   for (key in queueMethods) {
-    someInstace[key] = queueMethods[key]; 
+    someInstance[key] = queueMethods[key]; 
   }
-  return someInstace;
+  return someInstance;
 };
 
 var queueMethods = {};
@@ -20,7 +20,6 @@ queueMethods.enqueue = function(value) {
 
 queueMethods.dequeue = function() {
   if (this.size() > 0) {
-    console.log(this.min);
     var tmp = this[this.min];
     this[this.min] = undefined;
     this.min++;
