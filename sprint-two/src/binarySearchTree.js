@@ -21,6 +21,7 @@ var Node = function(value) {
 
 var BinaryMethods = {};
 
+//automatically rebalances when tree depth twice necessary depth 
 BinaryMethods.insert = function(value) {
   var depth = 1;
   this.count++;
@@ -49,7 +50,11 @@ BinaryMethods.insert = function(value) {
     this.rebalance();
   }
 };
-
+/*
+Implements Day-Sout-Warren algorithm, use right rotations to convert to a linked
+list(called a vine) then apply repeated left rotations to convert to a balanced
+binary search tree
+*/
 BinaryMethods.rebalance = function() {
   var treeToVine = function(top) {
     var tail = top;
@@ -89,13 +94,14 @@ BinaryMethods.rebalance = function() {
       scanner.left = child;
     }    
   };
-
+  //because the tree is its own root, immitate it with a node
   var pseudoGrand = Node(0);
   var pseudoRoot = Node(this.value);
   pseudoRoot.left = this.left;
   pseudoRoot.right = this.right;
   pseudoGrand.right = pseudoRoot;
 
+  //make the the tree's 'root' the pseudo root
   treeToVine(pseudoGrand);
   vineToTree(pseudoGrand, this.count);
   this.value = pseudoGrand.right.value;
@@ -135,7 +141,10 @@ BinaryMethods.depthFirstLog = function(func) {
   };
   depthFirst(this);
 };
-
+/*
+push node values to nested array, [0][i] refers to nodes at depth 1 etc.
+then call func
+*/
 BinaryMethods.breadthFirstLog = function(func) {
   var breadth = [];
   for (var i = 0; i < this.depth; i++) {
@@ -174,4 +183,7 @@ BinaryMethods._computeDepth = function() {
  * Contains O(n) = lg(n)
  * Insert O(n) = lg(n)
  * depthFirstLog: O(n) = n
+ * Rebalance O(n) = n;
+ * breadthFirst O(n) = n;
+ * _computeDepth O(n) = n
  */
