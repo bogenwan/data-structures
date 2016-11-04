@@ -31,10 +31,10 @@ Graph.prototype.removeNode = function(node) {
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode) {
-  if (this[fromNode] === undefined) {
+  if (this[fromNode] === undefined || this[toNode] === undefined) {
     return false;
   }
-  if (this[fromNode][toNode] !== undefined) {
+  if (this[fromNode][toNode] !== undefined && this[toNode][fromNode] !== undefined) {
     return true;
   }
   return false;
