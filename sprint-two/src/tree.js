@@ -42,16 +42,17 @@ treeMethods.traverse = function(func) {
 };
 
 treeMethods.removeFromParent = function(target) {
-  if (this.parent === null) {
+  var parent = target.parent;
+  if (parent === null) {
     return;
   } else {
-    var source = this;
-    this.parent.children = Array.prototype.call.filter(this.parent.children, function(child) {
-      if (child === source) {
-        return false;
+    var tmp = [];
+    for (var i = 0; i < parent.children.length; i++) {
+      if (parent.children[i] !== target) {
+        tmp.push(parent.children[i]);
       }
-      return true;
-    });
+    }
+    parent.children = tmp;
   }
 };
 

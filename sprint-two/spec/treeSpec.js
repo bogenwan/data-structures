@@ -32,6 +32,12 @@ describe('tree', function() {
     expect(tree.children[0].children[0].value).to.equal(6);
   });
 
+  it('should be able to remove children from a tree', function() {
+    tree.addChild(5);
+    tree.removeFromParent(tree.children[0]);
+    expect(tree.contains(5)).to.equal(false);
+  });
+
   it('should correctly detect nested children', function() {
     tree.addChild(5);
     tree.addChild(6);
