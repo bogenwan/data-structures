@@ -39,6 +39,14 @@ describe('linkedList', function() {
     expect(linkedList.removeHead()).to.equal(4);
   });
 
+  it('should return the value of the former tail when removeTail is called', function() {
+    linkedList.addToTail(4);
+    expect(linkedList.tail.value).to.equal(4);
+    expect(linkedList.tail.next).to.equal(null);
+    expect(linkedList.tail.prev).to.equal(null);
+    expect(linkedList.removeTail()).to.equal(4);
+  });
+  
   it('should contain a value that was added', function() {
     linkedList.addToTail(4);
     linkedList.addToTail(5);
@@ -54,6 +62,12 @@ describe('linkedList', function() {
     expect(linkedList.contains(4)).to.equal(false);
   });
 
+  it('should have links that work in both directions', function() {
+    linkedList.addToTail(4);
+    linkedList.addToTail(5);
+    expect(linkedList.head.next.value).to.equal(5);
+    expect(linkedList.tail.prev.value).to.equal(4);
+  });
 
-  // add more tests here to test the functionality of linkedList
+ // add more tests here to Test the functionality of linkedList
 });
