@@ -28,6 +28,13 @@ var RBTree = function() {
     return this.color;
   };
 
+  RBNode.prototype.isLeftChild = function() {
+    if (this.parent === null) {
+      throw new ReferenceError('called isLeftChild on the root');
+    }
+    return this === this.parent.left;
+  };
+
   this.root = null;
 
   isRed = function(node) {
@@ -92,6 +99,21 @@ var RBTree = function() {
       return false;
     }
     return true;
+  };
+
+  this.delete = function(value) {
+    var remove = this._search(value);
+    if (remove === null) {
+      return null;
+    }
+
+    if (remove.left === null && remove.right === null) {
+      if (remove === this.root) {
+        this.root = null;
+      } else {
+
+      }
+    }
   };
 
 
