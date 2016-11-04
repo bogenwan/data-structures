@@ -169,21 +169,6 @@ BinaryMethods._computeDepth = function() {
   return depthRecurse(this, 0);
 };
 
-var tree = BinarySearchTree(5);
-tree.insert(2);
-tree.insert(1);
-tree.insert(6);
-tree.insert(7);
-tree.insert(8);
-tree.insert(9);
-tree.insert(10);
-tree.insert(11);
-tree.insert(12);
-var array = [];
-var func = function(value) { array.push(value); };
-tree.depthFirstLog(func);
-console.log(array);
-tree.rebalance;
 /*
  * Complexity: What is the time complexity of the above functions?
  * Contains O(n) = lg(n)

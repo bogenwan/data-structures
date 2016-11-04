@@ -31,6 +31,16 @@ treeMethods.contains = function(target) {
   return false;
 };
 
+treeMethods.traverse = function(func) {
+  var depthFirst = function(node) {
+    func(node.value);
+    for (var i = 0; i < node.children.length; i++) {
+      depthFirst(node.children[i]);
+    }
+  };
+  depthFirst(this);
+};
+
 treeMethods.removeFromParent = function(target) {
   if (this.parent === null) {
     return;
