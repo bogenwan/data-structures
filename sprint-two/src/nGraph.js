@@ -53,6 +53,7 @@ nGraph.prototype.DFS = function(callBack, node) {
 };
 
 var graph = new nGraph();
+var reverseGraph = new nGraph();
 
 // this line lets you access the file system. You'll learn more about it later in the course
 var fs = require('fs');
@@ -66,6 +67,7 @@ fileLines.pop();
 fileLines.forEach(function(line) {
   var pair = line.split(' ');
   graph.addPair(pair[0], pair[1]);
+  reverseGraph.addPair(pair[1], pair[0]);
   console.log(line);
 });
 
