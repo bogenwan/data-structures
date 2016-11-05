@@ -103,8 +103,8 @@ var Kosaraju = function(graph, reverseGraph) {
       }        
     }
   }
-  console.log('graph', count);
-  console.log('reverseGraph', reverseCount);
+  // console.log('graph', count);
+  // console.log('reverseGraph', reverseCount);
 };
 
 var graph = new nGraph();
@@ -125,11 +125,10 @@ fileLines.forEach(function(line) {
   reverseGraph.addPair(pair[1], pair[0]);
 });
 
-var arr = [];
-var func = function(a) { arr.push(a); };
+// var arr = [];
+// var func = function(a) { arr.push(a); };
 Kosaraju(graph, reverseGraph);
-graph.DFS(func, '0');
-console.log(arr);
+
 
 
 

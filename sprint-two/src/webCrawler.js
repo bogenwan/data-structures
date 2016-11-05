@@ -1,3 +1,5 @@
+// modified from 'How to make a web crawler in JavaScript / Node.js' by Stephen
+// http://www.netinstructions.com/how-to-make-a-simple-web-crawler-in-javascript-and-node-js/
 var request = require('request');
 var cheerio = require('cheerio');
 var URL = require('url-parse');
