@@ -114,7 +114,7 @@ var reverseGraph = new nGraph();
 var fs = require('fs');
 
 // read the `adjacency-list` file in this directory (you might have named the file differently) and split it on new lines into an array
-var fileLines = fs.readFileSync('./twitter_combined.txt').toString().split('\n');
+var fileLines = fs.readFileSync('./test.txt').toString().split('\n');
 
 // you may have to do this 0 or more times, to remove blank lines from fileLines
 fileLines.pop();

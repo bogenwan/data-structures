@@ -51,7 +51,7 @@ BinaryMethods.insert = function(value) {
   }
 };
 /*
-Implements Day-Sout-Warren algorithm, use right rotations to convert to a linked
+Implements Day-Stout-Warren algorithm, use right rotations to convert to a linked
 list(called a vine) then apply repeated left rotations to convert to a balanced
 binary search tree
 */
@@ -93,7 +93,7 @@ BinaryMethods.rebalance = function() {
       scanner.left = child;
     }    
   };
-  //because the tree is its own root, immitate it with a node
+  //because the tree is its own root, imitate it with a node
   var pseudoGrand = Node(0);
   var pseudoRoot = Node(this.value);
   pseudoRoot.left = this.left;
