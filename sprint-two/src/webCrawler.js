@@ -16,31 +16,6 @@ var maxPagesToVisit = 100;
 
 pagesToVisit.push(startUrl);
 
-var WebGraph = function() {
-};
-
-WebGraph.prototype.addPair = function(fromNode, toNode) {
-  if (this[toNode] === undefined) {
-    this[toNode] = {};
-  }
-  if (this[fromNode] === undefined) {
-    this[fromNode] = {};
-  }
-  this[fromNode][toNode] = 1;
-};
-
-WebGraph.prototype.nodeCount = function() {
-  var counter = 0;
-  for (var key in this) {
-    if ((typeof this[key]) === 'function') {
-      //do nothing
-    } else {
-      counter++; 
-    }
-  }
-  return counter;
-};
-
 var crawl = function() {
   if (numPagesVisited >= maxPagesToVisit) {
     console.log('Reached max limit');
