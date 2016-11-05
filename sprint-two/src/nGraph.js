@@ -64,8 +64,9 @@ var Kosaraju = function(graph, reverseGraph) {
     }
   }
   visited = {};
-  for (node in reverseGraph) {
-    if ((typeof graph[node]) !== 'function' && visited[node] === undefined) {
+  while (list.length > 0) {
+    node = list.pop();
+    if (visited[node] === undefined) {
       var component = [];
       var mkcomponent = function(key) {
         component.push(key);
