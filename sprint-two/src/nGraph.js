@@ -23,12 +23,12 @@ nGraph.prototype.nodeCount = function() {
   return counter;
 };
 
-nGraph.prototype.DFS = function(callBack, node) {
-  if (callBack === undefined || this[node] === undefined) {
+nGraph.prototype.DFS = function(callback, node, visitMem) {
+  if (callback === undefined || this[node] === undefined) {
     return null;
   }
   var graph = this;
-  var visited = {};
+  var visited = ((typeof visitMem) === 'object' && visitMem !== null) ? visitMem : {};
   var first = [];
   visited[node] = true;
   first.push(node);
@@ -52,6 +52,30 @@ nGraph.prototype.DFS = function(callBack, node) {
   depthRecurse(node);
 };
 
+var Kosaraju = function(graph, reverseGraph) {
+  var list = [];
+  var visited = {};
+  var mklist = function(key) {
+    list.push(key);
+  };
+  for (var node in graph) {
+    if ((typeof graph[node]) !== 'function' && visited[node] === undefined) {
+      graph.DFS(mklist, node, visited);
+    }
+  }
+  visited = {};
+  for (node in reverseGraph) {
+    if ((typeof graph[node]) !== 'function' && visited[node] === undefined) {
+      var component = [];
+      var mkcomponent = function(key) {
+        component.push(key);
+      };
+      reverseGraph.DFS(mkcomponent, node, visited);
+      console.log(component);
+    }
+  }
+};
+
 var graph = new nGraph();
 var reverseGraph = new nGraph();
 
@@ -68,8 +92,11 @@ fileLines.forEach(function(line) {
   var pair = line.split(' ');
   graph.addPair(pair[0], pair[1]);
   reverseGraph.addPair(pair[1], pair[0]);
-  console.log(line);
 });
+
+var arr = [];
+var func = function(a) { arr.push(a); };
+Kosaraju(graph, reverseGraph);
 
 
 
